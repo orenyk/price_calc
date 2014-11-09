@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141109042856) do
   end
 
   create_table "components", force: true do |t|
+    t.integer  "product_id"
     t.string   "name"
     t.decimal  "price",      precision: 10, scale: 2
     t.datetime "created_at"
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20141109042856) do
   end
 
   create_table "products", force: true do |t|
+    t.integer  "category_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
