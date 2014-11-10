@@ -8,7 +8,8 @@ class ProductsController < ApplicationController
   end
 
   def show
-    respond_with(@product)
+    @manifests = @product.manifests
+    @new_manifest = Manifest.new
   end
 
   def new

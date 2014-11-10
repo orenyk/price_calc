@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @component_category.name
+
+= link_to 'Edit', edit_component_category_path(@component_category)
+'|
+= link_to 'Back', component_categories_path

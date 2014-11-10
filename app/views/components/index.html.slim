@@ -6,7 +6,7 @@
     thead
       tr
         th Name
-        th Price
+        th Cost
         th
         th
         th
@@ -15,8 +15,8 @@
       - @components.each do |component|
         tr
           td = component.name
-          td = component.price
-          td = component.price
+          td = component.cost
+          td = component.cost
           td = link_to 'Show', component
           td = link_to 'Edit', edit_component_path(component)
           td = link_to 'Destroy', component, data: {:confirm => 'Are you sure?'}, :method => :delete

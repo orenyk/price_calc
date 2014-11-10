@@ -41,6 +41,6 @@ class ComponentsController < ApplicationController
     end
 
     def component_params
-      params.require(:component).permit(:name, :price, :price)
+      params.require(:component).permit(:name, :cost)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141109044046) do
+ActiveRecord::Schema.define(version: 20141110063719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,23 +22,37 @@ ActiveRecord::Schema.define(version: 20141109044046) do
     t.datetime "updated_at"
   end
 
+  create_table "component_categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "components", force: true do |t|
     t.string   "name"
-    t.decimal  "price",      precision: 10, scale: 2
+    t.decimal  "cost",       precision: 12, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "manifests", force: true do |t|
+    t.integer  "component_id"
+    t.integer  "product_id"
+    t.decimal  "unit_cost",    precision: 12, scale: 3
+    t.integer  "count"
+    t.decimal  "total_cost",   precision: 12, scale: 3
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "manifests", ["component_id"], name: "index_manifests_on_component_id", using: :btree
+  add_index "manifests", ["product_id"], name: "index_manifests_on_product_id", using: :btree
 
   create_table "products", force: true do |t|
-    t.integer  "category_id"
     t.string   "name"
+    t.decimal  "cost",       precision: 12, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "products_components", id: false, force: true do |t|
-    t.integer "products_id"
-    t.integer "component_id"
   end
 
   create_table "users", force: true do |t|

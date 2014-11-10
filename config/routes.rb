@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+  resources :component_categories
+
   resources :categories
+
+  resources :manifests
 
   resources :products
 
