@@ -29,16 +29,16 @@ ActiveRecord::Schema.define(version: 20141109044046) do
     t.datetime "updated_at"
   end
 
-  create_table "parts_components", id: false, force: true do |t|
-    t.integer "part_id"
-    t.integer "component_id"
-  end
-
   create_table "products", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "products_components", id: false, force: true do |t|
+    t.integer "products_id"
+    t.integer "component_id"
   end
 
   create_table "users", force: true do |t|
