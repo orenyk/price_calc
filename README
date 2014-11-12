@@ -36,7 +36,7 @@ choose  Enter your selection: [default]
 option  OmniAuth provider?
 choose  Enter your selection: []
 option  Authorization?
-choose  Enter your selection: [roles]
+choose  Enter your selection: [none]
 option  Use a form builder gem?
 choose  Enter your selection: [simple_form]
 option  Add pages?
@@ -50,9 +50,9 @@ choose  Enter your selection: [heroku]
 option  Set a robots.txt file to ban spiders?
 choose  Enter your selection: [true]
 option  Create a GitHub repository? (y/n)
-choose  Enter your selection: [true]
+choose  Enter your selection: []
 option  Add gem and file for environment variables?
-choose  Enter your selection: [foreman]
+choose  Enter your selection: []
 option  Reduce assets logger noise during development?
 choose  Enter your selection: [true]
 option  Improve error reporting with 'better_errors' during development?

@@ -10,12 +10,4 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       = link_to 'Home', root_path, class: 'navbar-brand'
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        == if user_signed_in?
-          li
-            = link_to 'Categories', categories_path
-          li
-            = link_to 'Products', products_path
-          li
-            = link_to 'Components', components_path
-      ul.nav.navbar-nav.navbar-right
         == render 'layouts/navigation_links'

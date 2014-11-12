@@ -1,7 +1,7 @@
-class Category < ActiveRecord::Base
+class ComponentType < ActiveRecord::Base
 
   # associations
-  has_many :products
+  has_many :components
 
   # validations
   validates :name, presence: true

@@ -1,16 +1,31 @@
 class Product < ActiveRecord::Base
-  has_many :manifests
+
+  # associations
   belongs_to :category
+  belongs_to :family
+  belongs_to :material
+  has_many :ingredients
 
-  before_save :update_cost
+  # validations
+  validates :name, presence: true
+  validates :line, presence: true,
+    inclusion: { in: ['juditb', 'jb'] }
+  validates :cost_price, presence: true,
+    numericality: { greater_than_or_equal_to: 0 }
 
-  def cost
-    manifests.collect { |m| m.valid? ? (m.count * m.unit_cost) : 0 }.sum
+  # hooks
+  before_validation :update_cost_price
+
+  # method to evaluate cost price given a set of ingredients
+  def cost_price
+    ingredients.collect { |i| i.valid? ? (i.count * i.unit_cost) : 0 }.sum
   end
 
-  private
+private
 
-  def update_cost
-    self[:cost] = cost
+  # method to update the :cost_price parameter in the database
+  def update_cost_price
+    self[:cost_price] = cost_price
   end
+
 end

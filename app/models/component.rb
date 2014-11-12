@@ -1,4 +1,12 @@
 class Component < ActiveRecord::Base
-  has_many :manifests
-  belongs_to :component_category
+
+  # associations
+  belongs_to :component_type
+  has_many :ingredients
+
+  # validations
+  validates :name, presence: true
+  validates :cost, presence: true,
+    numericality: { greater_than_or_equal_to: 0 }
+
 end

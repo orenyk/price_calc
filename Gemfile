@@ -15,13 +15,9 @@ gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
 gem 'slim-rails'
-gem 'upmin-admin'
-gem 'select2-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]
-  gem 'foreman'
-  gem 'hub', :require=>nil
   gem 'quiet_assets'
   gem 'rails_layout'
 end

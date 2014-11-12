@@ -1,47 +1,71 @@
 class ProductsController < ApplicationController
+
+  # before actions
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  # index action
   def index
     @products = Product.all
-    respond_with(@products)
   end
 
+  # show action
   def show
-    @manifests = @product.manifests
-    @new_manifest = Manifest.new
+    @ingredients = @product.ingredients
+    @new_ingredient = Ingredient.new
   end
 
+  # new action
   def new
     @product = Product.new
-    respond_with(@product)
   end
 
+  # create action
+  def create
+    @product = Product.new(product_params)
+    if @product.save
+      flash[:notice] = 'Successfully created product!'
+      redirect_to @product and return
+    else
+      render action: 'new'
+    end
+  end
+
+  # edit action
   def edit
   end
 
-  def create
-    @product = Product.new(product_params)
-    @product.save
-    respond_with(@product)
-  end
-
+  # update action
   def update
-    @product.update(product_params)
-    respond_with(@product)
+    if @product.update_attributes(product_params)
+      flash[:notice] = 'Successfully updated product!'
+      redirect_to @product
+    else
+      render action: 'edit'
+    end
   end
 
+  # destroy acton
   def destroy
     @product.destroy
-    respond_with(@product)
+    flash[:notice] = 'Successfully destroyed product.'
+    redirect_to products_path
   end
 
-  private
-    def set_product
-      @product = Product.find(params[:id])
-    end
+private
 
-    def product_params
-      params.require(:product).permit(:name)
-    end
+  # find the relevant product from the params
+  def set_product
+    @product = Product.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'That page does not exist.'
+    redirect_to root_path and return
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :line, :category_id, :family_id,
+      :material_id)
+  end
+
 end

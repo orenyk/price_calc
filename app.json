@@ -11,8 +11,6 @@
     "Bootstrap",
     "authentication",
     "Devise",
-    "authorization",
-    "roles",
     "Ruby",
     "Rails"
   ],

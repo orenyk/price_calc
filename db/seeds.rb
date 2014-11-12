@@ -7,4 +7,3 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 user = CreateAdminService.new.call
 puts 'CREATED ADMIN USER: ' << user.email
-# Environment variables (ENV['...']) can be set in the file .env file.

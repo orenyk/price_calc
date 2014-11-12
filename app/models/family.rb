@@ -1,4 +1,4 @@
-class Category < ActiveRecord::Base
+class Family < ActiveRecord::Base
 
   # associations
   has_many :products
