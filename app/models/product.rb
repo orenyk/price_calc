@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
   validates :line, presence: true,
     inclusion: { in: ['juditb', 'jb'] }
   validates :cost_price, presence: true,
-    numericality: { greater_than: 0 }
+    numericality: { greater_than_or_equal_to: 0 }
 
   # hooks
   before_validation :update_cost_price
