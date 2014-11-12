@@ -9,6 +9,8 @@ class Ingredient < ActiveRecord::Base
     numericality: { only_integer: true, greater_than: 0 }
   validates :unit_cost, presence: true,
     numericality: { greater_than: 0 }
+  validates :total_cost, presence: true,
+    numericality: { greater_than: 0 }
   validate :product_present
   validate :component_present
 
