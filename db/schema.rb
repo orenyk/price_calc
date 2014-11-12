@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112165910) do
+ActiveRecord::Schema.define(version: 20141112172117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "components", force: true do |t|
     t.integer  "type_id"
@@ -25,6 +31,12 @@ ActiveRecord::Schema.define(version: 20141112165910) do
   end
 
   add_index "components", ["type_id"], name: "index_components_on_type_id", using: :btree
+
+  create_table "families", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ingredients", force: true do |t|
     t.integer  "product_id"
@@ -59,6 +71,12 @@ ActiveRecord::Schema.define(version: 20141112165910) do
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["family_id"], name: "index_products_on_family_id", using: :btree
   add_index "products", ["material_id"], name: "index_products_on_material_id", using: :btree
+
+  create_table "types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
