@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
 
   # destroy acton
   def destroy
-    @product.destory
+    @product.destroy
     flash[:notice] = 'Successfully destroyed product.'
     redirect_to products_path
   end
