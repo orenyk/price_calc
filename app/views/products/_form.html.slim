@@ -1,0 +1,9 @@
+= simple_form_for(@product) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :category
+    = f.association :type
+    = f.association :material
+    = f.input :line, collection: ['jb', 'juditb']
+    = f.input :name
