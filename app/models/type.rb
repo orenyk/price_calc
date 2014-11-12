@@ -1,4 +1,4 @@
-class Type < ActiveRecord::Base
+class ComponentType < ActiveRecord::Base
 
   # associations
   has_many :components

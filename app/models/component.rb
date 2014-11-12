@@ -1,7 +1,7 @@
 class Component < ActiveRecord::Base
 
   # associations
-  belongs_to :type
+  belongs_to :component_type
   has_many :ingredients
 
   # validations
