@@ -20,4 +20,48 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  # create action
+  def create
+    @product = Product.new(product_params)
+    if @product.save
+      flash[:notice] = 'Successfully created product!'
+      redirect_to @product and return
+    else
+      render action: 'new'
+    end
+  end
+
+  # edit action
+  def edit
+  end
+
+  # update action
+  def update
+    if @product.update_attributes(product_params)
+      flash[:notice] = 'Successfully updated product!'
+      redirect_to @product
+    else
+      render action: 'edit'
+    end
+  end
+
+  # destroy acton
+  def destroy
+    @product.destory
+    flash[:notice] = 'Successfully destroyed product.'
+    redirect_to products_path
+  end
+
+private
+
+  # find the relevant product from the params
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  def product_params
+    params.require(:product).permit(:name, :line, :category_id, :family_id,
+      :material_id)
+  end
+
 end

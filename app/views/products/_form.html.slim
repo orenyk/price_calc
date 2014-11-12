@@ -3,7 +3,11 @@
 
   .form-inputs
     = f.association :category
-    = f.association :type
+    = f.association :family
     = f.association :material
     = f.input :line, collection: ['jb', 'juditb']
     = f.input :name
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', :back, class: 'btn btn-danger'
