@@ -7,11 +7,13 @@ class Ingredient < ActiveRecord::Base
   # validations
   validates :count, presence: true,
     numericality: { only_integer: true, greater_than: 0 }
+  validates :unit_cost, presence: true,
+    numericality: { greater_than: 0 }
   validate :product_present
   validate :component_present
 
   # hooks
-  before_save :finalize
+  before_validation :finalize
 
   # evaluate the unit cost for this ingredient (pulls from database to keep
   # data up to date)

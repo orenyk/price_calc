@@ -13,9 +13,11 @@ class Product < ActiveRecord::Base
     inclusion: {
       in: ['yellow gold', 'white gold', 'red gold', 'silver', 'crystal']
     }
+  validates :cost_price, presence: true,
+    numericality: { greater_than: 0 }
 
   # hooks
-  before_save :update_cost
+  before_validate :update_cost_price
 
   # method to evaluate cost price given a set of ingredients
   def cost_price
@@ -25,7 +27,7 @@ class Product < ActiveRecord::Base
 private
 
   # method to update the :cost_price parameter in the database
-  def update_cost
+  def update_cost_price
     self[:cost_price] = cost_price
   end
 
