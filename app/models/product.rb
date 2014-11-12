@@ -3,21 +3,18 @@ class Product < ActiveRecord::Base
   # associations
   belongs_to :category
   belongs_to :family
+  belongs_to :material
   has_many :ingredients
 
   # validations
   validates :name, presence: true
   validates :line, presence: true,
-    inclusion: { in: ['juditb' 'jb'] }
-  validates :material, presence: true,
-    inclusion: {
-      in: ['yellow gold', 'white gold', 'red gold', 'silver', 'crystal']
-    }
+    inclusion: { in: ['juditb', 'jb'] }
   validates :cost_price, presence: true,
     numericality: { greater_than: 0 }
 
   # hooks
-  before_validate :update_cost_price
+  before_validation :update_cost_price
 
   # method to evaluate cost price given a set of ingredients
   def cost_price
