@@ -1,7 +1,7 @@
 class CreateComponentsTable < ActiveRecord::Migration
   def change
     create_table :components do |t|
-      t.belongs_to :type
+      t.references :type, index: true
 
       t.string :name
       t.decimal :cost, precision: 12, scale: 3
