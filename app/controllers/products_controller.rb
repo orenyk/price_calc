@@ -57,6 +57,10 @@ private
   # find the relevant product from the params
   def set_product
     @product = Product.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = 'That page does not exist.'
+    redirect_to root_path and return
   end
 
   def product_params
