@@ -1,0 +1,17 @@
+- provide(:title, @component.name)
+
+.page-header
+  h1 = @component.name
+
+.container
+  p
+    strong Type:
+    = @component.component_type ? " #{@component.component_type.name}" : ' none'
+  p
+    strong Cost:
+    = " #{number_to_currency(@component.cost, locale: Settings.locale.to_sym)}"
+
+.form-actions
+  => link_to 'Edit', edit_component_path(@component), class: 'btn btn-primary'
+  => link_to 'Delete', @component, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+  = link_to 'View All Components', components_path, class: 'btn btn-default'
