@@ -1,0 +1,10 @@
+- provide(:title, @material.name)
+
+.page-header
+  h1 = @material.name
+
+.container
+  .form-actions
+    => link_to 'Edit', edit_material_path(@material), class: 'btn btn-primary'
+    => link_to 'Delete', @material, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+    = link_to 'View All Categories', materials_path, class: 'btn btn-default'

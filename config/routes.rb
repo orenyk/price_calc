@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :products
   resources :categories
   resources :families
+  resources :materials
   resources :components
   resources :component_types
 end
