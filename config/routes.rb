@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :products
+  resources :categories
   resources :components
   resources :component_types
 end
