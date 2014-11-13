@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141112172117) do
+ActiveRecord::Schema.define(version: 20141113033346) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,14 +29,14 @@ ActiveRecord::Schema.define(version: 20141112172117) do
   end
 
   create_table "components", force: true do |t|
-    t.integer  "type_id"
     t.string   "name"
-    t.decimal  "cost",       precision: 12, scale: 3
+    t.decimal  "cost",              precision: 12, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "component_type_id"
   end
 
-  add_index "components", ["type_id"], name: "index_components_on_type_id", using: :btree
+  add_index "components", ["component_type_id"], name: "index_components_on_component_type_id", using: :btree
 
   create_table "families", force: true do |t|
     t.string   "name"
