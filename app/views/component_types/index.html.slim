@@ -1,0 +1,20 @@
+.page-header
+  h1 All Component Types
+
+.table-responsive.text-center
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Name
+        th
+        th
+        th
+    tbody
+    - @component_types.each do |component_type|
+      tr
+        td = component_type.name
+        td = link_to 'Show', component_type, class: 'btn btn-default'
+        td = link_to 'Edit', edit_component_type_path(component_type), class: 'btn btn-primary'
+        td = link_to 'Destroy', component_type, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+br
+= link_to 'New Component_type', new_component_type_path, class: 'btn btn-primary'
