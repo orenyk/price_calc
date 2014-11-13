@@ -1,7 +1,7 @@
 - provide(:title, @product.name)
 
 .page-header
-  h1=@product.name
+  h1 = @product.name
 
 .container
 - if @ingredients.size == 0
@@ -10,8 +10,6 @@
   p.text-center Ingredients go here
 
 .form-actions
-  = link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary'
-  |&nbsp;
-  = link_to 'Delete', @product, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
-  |&nbsp;
+  => link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary'
+  => link_to 'Delete', @product, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
   = link_to 'View All Products', products_path, class: 'btn btn-default'
