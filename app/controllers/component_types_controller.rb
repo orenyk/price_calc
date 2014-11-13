@@ -52,7 +52,7 @@ class ComponentTypesController < ApplicationController
 
 private
 
-  # find the relevant component_type from the params
+  # find the relevant component type from the params
   def set_component_type
     @component_type = ComponentType.find(params[:id])
 
