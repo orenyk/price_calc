@@ -5,6 +5,8 @@ class Ingredient < ActiveRecord::Base
   belongs_to :component
 
   # validations
+  validates_presence_of :product
+  validates_presence_of :component
   validates :count, presence: true,
     numericality: { only_integer: true, greater_than: 0 }
   validates :unit_cost, presence: true,
@@ -20,7 +22,7 @@ class Ingredient < ActiveRecord::Base
   # evaluate the unit cost for this ingredient (pulls from database to keep
   # data up to date)
   def unit_cost
-    @unit_cost ||= component.cost
+    @unit_cost ||= component ? component.cost : 0
   end
 
 private

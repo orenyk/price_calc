@@ -7,6 +7,9 @@ class Product < ActiveRecord::Base
   has_many :ingredients
 
   # validations
+  validates_presence_of :category
+  validates_presence_of :family
+  validates_presence_of :material
   validates :name, presence: true
   validates :line, presence: true,
     inclusion: { in: ['juditb', 'jb'] }
