@@ -10,8 +10,8 @@ class MaterialsController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
@@ -23,7 +23,7 @@ class MaterialsController < ApplicationController
     @material = Material.new(material_params)
     if @material.save
       flash[:notice] = 'Successfully created material!'
-      redirect_to @material and return
+      redirect_to materials_path and return
     else
       render action: 'new'
     end
@@ -37,7 +37,7 @@ class MaterialsController < ApplicationController
   def update
     if @material.update_attributes(material_params)
       flash[:notice] = 'Successfully updated material!'
-      redirect_to @material
+      redirect_to materials_path and return
     else
       render action: 'edit'
     end

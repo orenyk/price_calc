@@ -9,8 +9,8 @@ class ProductSetsController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
@@ -22,7 +22,7 @@ class ProductSetsController < ApplicationController
     @product_set = ProductSet.new(product_set_params)
     if @product_set.save
       flash[:notice] = 'Successfully created product_set!'
-      redirect_to @product_set and return
+      redirect_to product_sets_path and return
     else
       render action: 'new'
     end
@@ -36,7 +36,7 @@ class ProductSetsController < ApplicationController
   def update
     if @product_set.update_attributes(product_set_params)
       flash[:notice] = 'Successfully updated product_set!'
-      redirect_to @product_set
+      redirect_to product_sets_path and return
     else
       render action: 'edit'
     end

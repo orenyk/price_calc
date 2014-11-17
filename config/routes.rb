@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :products do
     resources :ingredients
   end
-  resources :categories
-  resources :product_sets
-  resources :materials
+  resources :categories, except: :show
+  resources :product_sets, except: :show
+  resources :materials, except: :show
   resources :components
-  resources :component_types
+  resources :component_types, except: :show
 end

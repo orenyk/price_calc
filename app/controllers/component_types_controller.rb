@@ -10,8 +10,8 @@ class ComponentTypesController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
@@ -23,7 +23,7 @@ class ComponentTypesController < ApplicationController
     @component_type = ComponentType.new(component_type_params)
     if @component_type.save
       flash[:notice] = 'Successfully created component type!'
-      redirect_to @component_type and return
+      redirect_to component_types_path and return
     else
       render action: 'new'
     end
@@ -37,7 +37,7 @@ class ComponentTypesController < ApplicationController
   def update
     if @component_type.update_attributes(component_type_params)
       flash[:notice] = 'Successfully updated component type!'
-      redirect_to @component_type
+      redirect_to component_types_path and return
     else
       render action: 'edit'
     end

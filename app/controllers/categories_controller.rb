@@ -10,8 +10,8 @@ class CategoriesController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:notice] = 'Successfully created category!'
-      redirect_to @category and return
+      redirect_to categories_path and return
     else
       render action: 'new'
     end
@@ -37,7 +37,7 @@ class CategoriesController < ApplicationController
   def update
     if @category.update_attributes(category_params)
       flash[:notice] = 'Successfully updated category!'
-      redirect_to @category
+      redirect_to categories_path and return
     else
       render action: 'edit'
     end
@@ -47,7 +47,7 @@ class CategoriesController < ApplicationController
   def destroy
     @category.destroy
     flash[:notice] = 'Successfully destroyed category.'
-    redirect_to categorys_path
+    redirect_to categories_path
   end
 
 private
