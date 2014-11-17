@@ -6,7 +6,7 @@ class ComponentsController < ApplicationController
 
   # index action
   def index
-    @components = Component.all
+    @components = Component.all.order(:name)
   end
 
   # show action

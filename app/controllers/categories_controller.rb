@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
 
   # index action
   def index
-    @categories = Category.all
+    @categories = Category.all.order(:name)
   end
 
   # show action

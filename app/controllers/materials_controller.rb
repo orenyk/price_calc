@@ -6,7 +6,7 @@ class MaterialsController < ApplicationController
 
   # index action
   def index
-    @materials = Material.all
+    @materials = Material.all.order(:name)
   end
 
   # show action

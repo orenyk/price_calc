@@ -6,7 +6,7 @@ class ComponentTypesController < ApplicationController
 
   # index action
   def index
-    @component_types = ComponentType.all
+    @component_types = ComponentType.all.order(:name)
   end
 
   # show action

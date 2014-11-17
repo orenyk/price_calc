@@ -5,7 +5,7 @@ class ProductSetsController < ApplicationController
 
   # index action
   def index
-    @product_sets = ProductSet.all
+    @product_sets = ProductSet.all.order(:name)
   end
 
   # show action

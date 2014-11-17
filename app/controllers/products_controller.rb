@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
 
   # index action
   def index
-    @products = Product.all
+    @products = Product.all.order(:name)
   end
 
   # show action
