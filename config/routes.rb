@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :materials, except: :show
   resources :components
   resources :component_types, except: :show
+  resources :prices, except: :show
 end

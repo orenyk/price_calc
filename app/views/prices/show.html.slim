@@ -1,0 +1,10 @@
+- provide(:title, @price.name)
+
+.page-header
+  h1 = @price.name
+
+.container
+  .form-actions
+    => link_to 'Edit', edit_price_path(@price), class: 'btn btn-primary'
+    => link_to 'Delete', @price, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+    = link_to 'View All Categories', prices_path, class: 'btn btn-default'

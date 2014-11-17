@@ -1,0 +1,10 @@
+= simple_form_for(@price) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :multiple
+
+  .form-actions
+    => f.button :submit, class: 'btn btn-primary'
+    = link_to 'Cancel', :back, class: 'btn btn-danger'
