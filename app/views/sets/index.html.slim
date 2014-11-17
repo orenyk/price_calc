@@ -1,0 +1,20 @@
+.page-header
+  h1 All Sets
+
+.table-responsive.text-center
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Name
+        th
+        th
+        th
+    tbody
+    - @sets.each do |set|
+      tr
+        td = set.name
+        td = link_to 'Show', set, class: 'btn btn-default'
+        td = link_to 'Edit', edit_set_path(set), class: 'btn btn-primary'
+        td = link_to 'Destroy', set, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
+br
+= link_to 'New Set', new_set_path, class: 'btn btn-primary'

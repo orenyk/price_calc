@@ -5,7 +5,7 @@
     = simple_form_for [ingredient.product, ingredient] do |f|
       .row
         .col-xs-2
-          = f.number_field :count, value: ingredient.count.to_i, class: 'form-control', min: 1
+          = f.number_field :count, value: ingredient.count.to_i, min: 1, input_html: { class: 'form-control' }
           = f.hidden_field :product_id, value: ingredient.product.id
         .col-xs-1.text-right
           h5

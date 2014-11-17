@@ -64,7 +64,7 @@ private
   end
 
   def product_params
-    params.require(:product).permit(:name, :line, :category_id, :family_id,
+    params.require(:product).permit(:name, :line, :category_id, :set_id,
       :material_id)
   end
 

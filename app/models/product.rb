@@ -2,13 +2,13 @@ class Product < ActiveRecord::Base
 
   # associations
   belongs_to :category
-  belongs_to :family
+  belongs_to :set
   belongs_to :material
   has_many :ingredients
 
   # validations
   validates_presence_of :category
-  validates_presence_of :family
+  validates_presence_of :set
   validates_presence_of :material
   validates :name, presence: true
   validates :line, presence: true,
