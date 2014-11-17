@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   belongs_to :category
   belongs_to :product_set
   belongs_to :material
-  has_many :ingredients
+  has_many :ingredients, dependent: :destroy
 
   # validations
   validates_presence_of :category

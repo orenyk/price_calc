@@ -20,7 +20,20 @@ class IngredientsController < ApplicationController
 
   # create action
   def create
-    @ingredient = Ingredient.new(ingredient_params)
+    # check for existing ingredient with that component and product
+    prod = ingredient_params[:product_id]
+    comp = ingredient_params[:component_id]
+    other_ing = Ingredient.where("product_id = ? AND component_id = ?",
+      prod ? prod : 0, comp ? comp : 0)
+    # if it exists, replace @ingredient and simply increment the count
+    if other_ing.first && ingredient_params[:count].to_i > 0
+      @ingredient = other_ing.first
+      @ingredient.count += ingredient_params[:count].to_i
+    # otherwise, create a new ingredient
+    else
+      @ingredient = Ingredient.new(ingredient_params)
+    end
+    # now try to save
     if @ingredient.save
       flash[:notice] = 'Successfully added ingredient!'
     elsif @ingredient.component.nil?
@@ -30,7 +43,7 @@ class IngredientsController < ApplicationController
     else
       flash[:error] = 'That didn\'t work, please try again.'
     end
-    redirect_to @ingredient.product and return
+    redirect_to product_path(@ingredient.product), status: 303 and return
   end
 
   # edit action
@@ -44,14 +57,17 @@ class IngredientsController < ApplicationController
     else
       flash[:error] = 'That didn\'t work, please try again.'
     end
-    redirect_to @ingredient.product
+    redirect_to product_path(@ingredient.product), status: 303
   end
 
   # destroy acton
   def destroy
     @ingredient.destroy
     flash[:notice] = 'Successfully removed ingredient.'
-    redirect_to @ingredient.product
+    respond_to do |format|
+      format.html { redirect_to product_path(@ingredient.product), status: 303 }
+      format.js { render :js => "window.location.href = '#{product_path(@ingredient.product)}'" }
+    end
   end
 
 private
