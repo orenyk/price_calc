@@ -62,7 +62,7 @@ private
   end
 
   def price_params
-    params.require(:price).permit(:name, :cost, :price_type_id)
+    params.require(:price).permit(:name, :multiple)
   end
 
 end
