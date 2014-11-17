@@ -9,9 +9,9 @@ class ComponentsController < ApplicationController
     @components = Component.all.order(:name)
   end
 
-  # show action
-  # def show
-  # end
+  show action
+  def show
+  end
 
   # new action
   def new
