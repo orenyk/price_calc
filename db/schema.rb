@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117062742) do
+ActiveRecord::Schema.define(version: 20141117065229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,26 +57,26 @@ ActiveRecord::Schema.define(version: 20141117062742) do
     t.datetime "updated_at"
   end
 
+  create_table "product_sets", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "products", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
     t.string   "line"
-    t.decimal  "cost_price",  precision: 12, scale: 3
+    t.decimal  "cost_price",     precision: 12, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "material_id"
-    t.integer  "set_id"
+    t.integer  "product_set_id"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["material_id"], name: "index_products_on_material_id", using: :btree
-  add_index "products", ["set_id"], name: "index_products_on_set_id", using: :btree
-
-  create_table "sets", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "products", ["product_set_id"], name: "index_products_on_product_set_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
