@@ -5,4 +5,10 @@ class Price < ActiveRecord::Base
   validates :multiple, presence: true,
     numericality: { greater_than_or_equal_to: 0 }
 
+  # methods
+  def multiple_with_vat
+    mult = Settings.VAT ? Settings.VAT : 1
+    multiple*mult
+  end
+
 end

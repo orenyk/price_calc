@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
   def show
     @ingredients = @product.ingredients.includes(:component)
     @new_ingredient = Ingredient.new
+    @prices = Price.all
   end
 
   # new action
@@ -64,8 +65,8 @@ private
   end
 
   def product_params
-    params.require(:product).permit(:name, :line, :category_id, :set_id,
-      :material_id)
+    params.require(:product).permit(:name, :line, :category_id,
+      :product_set_id, :material_id)
   end
 
 end
