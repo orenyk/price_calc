@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   resources :categories, except: :show
   resources :product_sets, except: :show
   resources :materials, except: :show
-  resources :components
+  resources :components, except: :show
   resources :component_types, except: :show
   resources :prices, except: :show
 end

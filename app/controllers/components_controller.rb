@@ -10,8 +10,8 @@ class ComponentsController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
@@ -23,7 +23,7 @@ class ComponentsController < ApplicationController
     @component = Component.new(component_params)
     if @component.save
       flash[:notice] = 'Successfully created component!'
-      redirect_to @component and return
+      redirect_to components_path and return
     else
       render action: 'new'
     end
@@ -37,7 +37,7 @@ class ComponentsController < ApplicationController
   def update
     if @component.update_attributes(component_params)
       flash[:notice] = 'Successfully updated component!'
-      redirect_to @component
+      redirect_to components_path
     else
       render action: 'edit'
     end
