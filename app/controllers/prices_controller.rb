@@ -6,7 +6,7 @@ class PricesController < ApplicationController
 
   # index action
   def index
-    @prices = Price.all
+    @prices = Price.all.order(:multiple)
   end
 
   # show action

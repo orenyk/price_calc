@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
   def show
     @ingredients = @product.ingredients.includes(:component)
     @new_ingredient = Ingredient.new
-    @prices = Price.all
+    @prices = Price.all.order(:multiple)
   end
 
   # new action
