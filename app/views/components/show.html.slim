@@ -9,7 +9,7 @@
     = @component.component_type ? " #{@component.component_type.name}" : ' none'
   p
     strong Cost:
-    = " #{number_to_currency(@component.cost, locale: Settings.locale.to_sym)}"
+    = local_currency(@component.cost)
 
   .form-actions
     => link_to 'Edit', edit_component_path(@component), class: 'btn btn-primary'

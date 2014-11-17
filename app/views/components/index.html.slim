@@ -15,7 +15,7 @@
     - @components.each do |component|
       tr
         td = component.name
-        td = number_to_currency(component.cost, locale: Settings.locale.to_sym)
+        td = local_currency(component.cost)
         td = component.component_type ? link_to("#{component.component_type.name}", component.component_type) : 'none'
         td = link_to 'Show', component, class: 'btn btn-default'
         td = link_to 'Edit', edit_component_path(component), class: 'btn btn-primary'
