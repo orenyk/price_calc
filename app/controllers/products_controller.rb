@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
 
   # show action
   def show
-    @ingredients = @product.ingredients
+    @ingredients = @product.ingredients.includes(:component)
     @new_ingredient = Ingredient.new
   end
 
