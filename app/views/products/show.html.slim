@@ -5,11 +5,11 @@
     = @product.name
     small
       |  (
-      = link_to @product.product_set.name.downcase, @product.product_set
+      = link_to @product.product_set.name.downcase, product_sets_path
       | ,
-      =< link_to @product.material.name.downcase, @product.material
+      =< link_to @product.material.name.downcase, materials_path
       | ,
-      =< link_to @product.category.name.downcase.singularize, @product.category
+      =< link_to @product.category.name.downcase.singularize, categories_path
       | )
 
 .container
