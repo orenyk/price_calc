@@ -21,7 +21,7 @@ class ProductSetsController < ApplicationController
   def create
     @product_set = ProductSet.new(product_set_params)
     if @product_set.save
-      flash[:notice] = 'Successfully created product_set!'
+      flash[:notice] = 'Successfully created product set!'
       redirect_to product_sets_path and return
     else
       render action: 'new'
@@ -35,7 +35,7 @@ class ProductSetsController < ApplicationController
   # update action
   def update
     if @product_set.update_attributes(product_set_params)
-      flash[:notice] = 'Successfully updated product_set!'
+      flash[:notice] = 'Successfully updated product set!'
       redirect_to product_sets_path and return
     else
       render action: 'edit'
@@ -45,7 +45,7 @@ class ProductSetsController < ApplicationController
   # destroy acton
   def destroy
     @product_set.destroy
-    flash[:notice] = 'Successfully destroyed product_set.'
+    flash[:notice] = 'Successfully destroyed product set.'
     redirect_to product_sets_path
   end
 
