@@ -3,6 +3,14 @@
 .page-header
   h1
     = @product.name
+    small
+      |  (
+      = link_to @product.product_set.name.downcase, @product.product_set
+      | ,
+      =< link_to @product.material.name.downcase, @product.material
+      | ,
+      =< link_to @product.category.name.downcase.singularize, @product.category
+      | )
 
 .container
   .row
