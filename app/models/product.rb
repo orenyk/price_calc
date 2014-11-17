@@ -10,7 +10,7 @@ class Product < ActiveRecord::Base
   validates_presence_of :category
   validates_presence_of :product_set
   validates_presence_of :material
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :line, presence: true,
     inclusion: { in: ['juditb', 'jb'] }
   validates :cost_price, presence: true,

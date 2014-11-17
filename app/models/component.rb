@@ -6,7 +6,7 @@ class Component < ActiveRecord::Base
 
   # validations
   validates_presence_of :component_type
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :cost, presence: true,
     numericality: { greater_than_or_equal_to: 0 }
 

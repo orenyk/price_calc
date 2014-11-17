@@ -4,6 +4,6 @@ class ProductSet < ActiveRecord::Base
   has_many :products
 
   # validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
 end

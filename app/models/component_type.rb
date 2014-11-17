@@ -4,6 +4,6 @@ class ComponentType < ActiveRecord::Base
   has_many :components
 
   # validations
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
 end
