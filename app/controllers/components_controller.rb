@@ -9,7 +9,7 @@ class ComponentsController < ApplicationController
     @components = Component.all.order(:name)
   end
 
-  show action
+  # show action
   def show
   end
 
