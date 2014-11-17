@@ -1,15 +1,52 @@
 - provide(:title, @product.name)
 
 .page-header
-  h1 = @product.name
+  h1
+    = @product.name
+    small
+      = " (#{local_currency(@product.cost_price)})"
 
 .container
+  .row
+    .col-xs-8.col-xs-offset-2.text-center
+      h3 Components
 - if @ingredients.size == 0
-  p.text-center No components added
+  .row
+    .col-xs-8.col-xs-offset-2.text-center
+      p No components added
 - else
-  p.text-center Ingredients go here
+  .row
+    .col-xs-3.text-center
+      h4 Ingredient
+    .col-xs-2.text-left
+      h4 Count
+    .col-xs-2.text-left
+      h4 Unit Cost
+    .col-xs-2.text-left
+      h4 Total Cost
+  - @ingredients.each do |ingredient|
+    = render 'ingredient_form', ingredient: ingredient
 
+.container
+  .row
+    .col-xs-8.col-xs-offset-2.text-center
+      h3 Add New Component
+
+  .row
+    .col-xs-11.col-xs-offset-1
+      = simple_form_for [@product, @new_ingredient] do |f|
+        .row
+          .col-xs-2
+            = f.number_field :count, value: 1, class: 'form-control', min: 1
+            = f.hidden_field :product_id, value: @product.id
+          .col-xs-4
+            = f.input :component_id, collection: ComponentType.all, as: :grouped_select, group_method: :components, input_html: { class: 'form-control' }, label: false, prompt: 'Please select a component'
+          .col-xs-4.text-right.form-actions
+            = f.submit 'Add', class: 'btn btn-primary'
+br
+
+.container
   .form-actions
-    => link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary'
-    => link_to 'Delete', @product, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
-    = link_to 'View All Products', products_path, class: 'btn btn-default'
+  => link_to 'Edit', edit_product_path(@product), class: 'btn btn-primary'
+  => link_to 'Delete', @product, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+  = link_to 'View All Products', products_path, class: 'btn btn-default'

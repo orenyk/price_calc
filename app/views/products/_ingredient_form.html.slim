@@ -1,0 +1,22 @@
+.row
+  .col-xs-3.text-center
+    h5 = link_to ingredient.component.name, ingredient.component
+  .col-xs-9
+    = simple_form_for [ingredient.product, ingredient] do |f|
+      .row
+        .col-xs-2
+          = f.number_field :count, value: ingredient.count.to_i, class: 'form-control', min: 1
+          = f.hidden_field :product_id, value: ingredient.product.id
+        .col-xs-1.text-right
+          h5
+            | @
+        .col-xs-2.text-right
+          h5 = local_currency(ingredient.unit_cost)
+        .col-xs-1.text-right
+          h5
+            | =
+        .col-xs-2.text-right
+          h5 = local_currency(ingredient.total_cost)
+        .col-xs-4.text-right
+          => f.submit 'Update', class: 'btn btn-primary'
+          = link_to 'Delete', [ingredient.product, ingredient], { data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: 'btn btn-danger' }
