@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
   # method to validate that product line and product set are compatible
   def line_set_match
     unless product_set.product_line == product_line
-      errors.add('Invalid product set, please choose one belonging to the correct product line.')
+      errors.add(:product_set, ' is invalid, please choose a set belonging to the correct product line.')
     end
   end
 
