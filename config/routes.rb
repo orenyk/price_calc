@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :ingredients
   end
   resources :categories, except: :show
+  resources :product_lines, except: :show
   resources :product_sets, except: :show
   resources :materials, except: :show
   resources :components

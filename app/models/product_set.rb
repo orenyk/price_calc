@@ -6,5 +6,6 @@ class ProductSet < ActiveRecord::Base
 
   # validations
   validates :name, presence: true, uniqueness: true
+  validates :product_line_id, presence: true
 
 end
