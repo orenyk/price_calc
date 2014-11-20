@@ -27,7 +27,8 @@ class ReportsController < ApplicationController
     @products = @products.where(product_set: ps) unless ps.empty?
     @products = @products.where(category: c) unless c.empty?
     @products = @products.where(materials: m) unless m.empty?
-    binding.pry
+    # set up price selection and VAT toggle setting as class variables for the
+    # view
     render 'show'
   end
 
