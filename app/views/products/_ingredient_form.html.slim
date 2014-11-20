@@ -17,6 +17,6 @@
             | =
         .col-xs-2.text-right
           h5 = local_currency(ingredient.total_cost)
-        .col-xs-4.text-right
+        .col-xs-4.text-center
           => f.submit 'Update', class: 'btn btn-primary'
           = link_to 'Delete', [ingredient.product, ingredient], { data: { confirm: 'Are you sure?' }, method: :delete, remote: true, class: 'btn btn-danger' }

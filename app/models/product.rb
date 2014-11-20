@@ -11,8 +11,6 @@ class Product < ActiveRecord::Base
   validates_presence_of :product_set
   validates_presence_of :material
   validates :name, presence: true, uniqueness: true
-  validates :line, presence: true,
-    inclusion: { in: ['juditb', 'jb'] }
   validates :cost_price, presence: true,
     numericality: { greater_than_or_equal_to: 0 }
 

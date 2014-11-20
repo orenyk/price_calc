@@ -3,9 +3,8 @@
 
   .form-inputs
     = f.association :category, input_html: { class: 'form-control' }
-    = f.association :product_set, input_html: { class: 'form-control' }
+    = f.input :product_set_id, collection: ProductLine.all.order(:name), as: :grouped_select, group_method: "product_sets".to_sym, input_html: { class: 'form-control' }, label_method: :name, value_method: :id, group_label_method: :name, prompt: 'Please select a product set', required: true
     = f.association :material, input_html: { class: 'form-control' }
-    = f.input :line, collection: ['jb', 'juditb'], input_html: { class: 'form-control' }
     = f.input :name
 
   .form-actions
