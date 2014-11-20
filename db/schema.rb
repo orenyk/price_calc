@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120045818) do
+ActiveRecord::Schema.define(version: 20141120065114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,15 +82,17 @@ ActiveRecord::Schema.define(version: 20141120045818) do
   create_table "products", force: true do |t|
     t.integer  "category_id"
     t.string   "name"
-    t.decimal  "cost_price",     precision: 12, scale: 3
+    t.decimal  "cost_price",      precision: 12, scale: 3
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "material_id"
     t.integer  "product_set_id"
+    t.integer  "product_line_id"
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["material_id"], name: "index_products_on_material_id", using: :btree
+  add_index "products", ["product_line_id"], name: "index_products_on_product_line_id", using: :btree
   add_index "products", ["product_set_id"], name: "index_products_on_product_set_id", using: :btree
 
   create_table "users", force: true do |t|
