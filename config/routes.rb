@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :components
   resources :component_types, except: :show
   resources :prices, except: :show
+
+  # reporting resource
+  resources :reports, except: [:edit, :update]
 end
