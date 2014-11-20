@@ -1,8 +1,7 @@
-class ProductSet < ActiveRecord::Base
+class ProductLine < ActiveRecord::Base
 
   # associations
-  has_many :products
-  belongs_to :product_line
+  has_many :product_sets
 
   # validations
   validates :name, presence: true, uniqueness: true

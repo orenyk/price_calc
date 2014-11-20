@@ -1,0 +1,10 @@
+- provide(:title, @product_line.name)
+
+.page-header
+  h1 = @product_line.name
+
+.container
+  .form-actions
+    => link_to 'Edit', edit_product_line_path(@product_line), class: 'btn btn-primary'
+    => link_to 'Delete', @product_line, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
+    = link_to 'View All Product Lines', product_lines_path, class: 'btn btn-default'
