@@ -14,24 +14,55 @@
 
 .container
   .row
+    .col-xs-3.col-xs-offset-1.panel.ingredient-form
+      h3.text-center Add New Component
+      br
+      = simple_form_for [@product, @new_ingredient] do |f|
+        .form-inputs
+          = f.input :count, as: :integer, value: 1, min: 1, input_html: { class: 'form-control' }, required: true
+          = f.hidden_field :product_id, value: @product.id
+          = f.input :component_id, collection: ComponentType.all.order(:name), as: :grouped_select, group_method: "components".to_sym, input_html: { class: 'form-control' }, label_method: :name, value_method: :id, group_label_method: :name, prompt: 'Please select a component', required: true
+          br
+        .form-actions.text-center
+          = f.submit 'Add', class: 'btn btn-primary'
+
+    .col-xs-6.col-xs-offset-1.text-center.panel.price-list
+      h3 Prices
+      .table-responsive.text-center
+        table.table.table-striped.table-bordered.table-hover
+          thead
+            tr
+              th Name
+              th Cost
+              th With VAT
+          tbody
+          - @prices.each do |price|
+            tr
+              td = price.name
+              td.text-right = local_currency(price.multiple*@product.cost_price)
+              td.text-right = local_currency(price.multiple_with_vat*@product.cost_price)
+br
+
+.container.panel.ingredient-list
+  .row
     .col-xs-8.col-xs-offset-2.text-center
       h3 Components
-- if @ingredients.size == 0
-  .row
-    .col-xs-8.col-xs-offset-2.text-center
-      p No components added
-- else
-  .row
-    .col-xs-3.text-center
-      h4 Ingredient
-    .col-xs-2.text-left
-      h4 Count
-    .col-xs-2.text-left
-      h4 Unit Cost
-    .col-xs-2.text-left
-      h4 Total Cost
-  - @ingredients.each do |ingredient|
-    = render 'ingredient_form', ingredient: ingredient
+  - if @ingredients.size == 0
+    .row
+      .col-xs-8.col-xs-offset-2.text-center
+        p No components added
+  - else
+    .row
+      .col-xs-3.text-center
+        h4 Ingredient
+      .col-xs-2.text-center
+        h4 Count
+      .col-xs-2.text-center
+        h4 Unit Cost
+      .col-xs-2.text-center
+        h4 Total Cost
+    - @ingredients.each do |ingredient|
+      = render 'ingredient_form', ingredient: ingredient
 
 br
 
@@ -52,27 +83,6 @@ br
           .col-xs-4.text-right.form-actions
             = f.submit 'Add', class: 'btn btn-primary'
 
-br
-
-.container
-  .row
-    .col-xs-8.col-xs-offset-2.text-center
-      h3 Prices
-  .row
-    .col-xs-8.col-xs-offset-2
-      .table-responsive.text-center
-        table.table.table-striped.table-bordered.table-hover
-          thead
-            tr
-              th Name
-              th Cost
-              th With VAT
-          tbody
-          - @prices.each do |price|
-            tr
-              td = price.name
-              td.text-right = local_currency(price.multiple*@product.cost_price)
-              td.text-right = local_currency(price.multiple_with_vat*@product.cost_price)
 br
 
 .container
