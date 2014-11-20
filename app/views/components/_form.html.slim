@@ -2,9 +2,10 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :component_type
-    = f.input :name
-    = f.input :cost
+    = f.association :component_type, input_html: { class: 'form-control' }
+    = f.input :name, input_html: { class: 'form-control' }
+    = f.input :cost, input_html: { class: 'form-control' }
+    br
 
   .form-actions
     => f.button :submit, class: 'btn btn-primary'

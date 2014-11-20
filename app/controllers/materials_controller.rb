@@ -54,7 +54,7 @@ private
 
   # find the relevant material from the params
   def set_material
-    @material = material.find(params[:id])
+    @material = Material.find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

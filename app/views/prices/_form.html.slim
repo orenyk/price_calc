@@ -2,8 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :multiple
+    = f.input :name, input_html: { class: 'form-control' }
+    = f.input :multiple, input_html: { class: 'form-control' }
+    br
 
   .form-actions
     => f.button :submit, class: 'btn btn-primary'
