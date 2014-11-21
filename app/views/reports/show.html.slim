@@ -1,2 +1,30 @@
-/ everything goes here
-= link_to 'Cancel', :back, class: 'btn btn-danger'
+- provide(:title, 'Price List')
+
+br
+= link_to 'Go Back', :back, class: 'btn btn-danger hidden-print'
+br
+
+- @lines.each do |line|
+  .page_header
+    h1 Price List (#{line.name})
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr colspan=@colspan
+          th = line.name
+        tr
+          th Product Name
+          th Product Set
+          - @prices.each do |price|
+            th = price.name
+            - if @enable_vat
+              th = "#{price.name} With VAT"
+      tbody
+      - @products.where(product_line_id: line.id).each do |product|
+        tr
+          td = product.name
+          td = product.product_set.name
+          - @prices.each do |price|
+            td = local_currency(product.cost_price)
+            - if @enable_vat
+              td = local_currency(price.multiple_with_vat*product.cost_price)

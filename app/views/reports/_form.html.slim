@@ -24,7 +24,7 @@
       .col-xs-3
         .h4 Prices
         .checkbox
-          = f.input :price_ids, as: :check_boxes, collection: Price.all { |p| [p.name, p.id] }, label: false
+          = f.input :price_ids, as: :check_boxes, collection: Price.all.order(:multiple) { |p| [p.name, p.id] }, label: false
       .col-xs-3
         .h4 VAT?
         .checkbox

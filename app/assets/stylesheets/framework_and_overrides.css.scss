@@ -100,3 +100,11 @@ th {
 .panel {
   padding-bottom: 30px;
 }
+
+@media print {
+  table { page-break-after:always }
+  tr    { page-break-inside:avoid; page-break-after:auto }
+  td    { page-break-inside:avoid; page-break-after:auto }
+  thead { display:table-header-group }
+  tfoot { display:table-footer-group }
+}

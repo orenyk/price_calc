@@ -17,18 +17,29 @@ class ReportsController < ApplicationController
   # create action
   def create
     # filter products
-    @products = Product.all
+
     # account for empty string passed for missing checkboxes
     pl = report_params[:product_line_ids].reject!(&:empty?)
     ps = report_params[:product_set_ids].reject!(&:empty?)
     c = report_params[:category_ids].reject!(&:empty?)
     m = report_params[:material_ids].reject!(&:empty?)
+
+    # store product lines and filtered products
+    @lines = ProductLine.all
+    @lines = ProductLine.where(id: pl) unless pl.empty?
+    @products = Product.includes(:product_set).all.order(:product_set_id)
     @products = @products.where(product_line: pl) unless pl.empty?
     @products = @products.where(product_set: ps) unless ps.empty?
     @products = @products.where(category: c) unless c.empty?
     @products = @products.where(materials: m) unless m.empty?
+
     # set up price selection and VAT toggle setting as class variables for the
     # view
+    p = report_params[:price_ids].reject!(&:empty?)
+    @prices = Price.all.order(:multiple)
+    @prices = Price.where(id: p).order(:multiple) unless p.empty?
+    @enable_vat = report_params[:enable_vat] == '1'
+    @colspan = 2 + @prices.length * (@enable_vat ? 2 : 1)
     render 'show'
   end
 
