@@ -1,6 +1,6 @@
 .row
   .col-xs-3.text-center
-    h5 = link_to ingredient.component.name, ingredient.component
+    h5 = link_to ingredient.component.name, edit_component_path(ingredient.component)
   .col-xs-9
     = simple_form_for [ingredient.product, ingredient] do |f|
       .row

@@ -10,8 +10,8 @@ class ComponentsController < ApplicationController
   end
 
   # show action
-  def show
-  end
+  # def show
+  # end
 
   # new action
   def new
