@@ -1,0 +1,51 @@
+- provide(:title, 'Help')
+
+.container
+  .col-sm-8.col-sm-offset-2
+    .page-header
+      h1 Help
+
+    h2 Overview
+    p This app is designed to generate price lists for products composed of multiple components. It is particularly suited to handmade / craft products whose component costs are known and that share components across multiple products. By adding up the costs of the components that serve as "ingredients" for each product, the cost price can easily be calculated. This cost price can then be mutliplied by a series of multiples to define the other prices for the product (e.g. wholesale, retail, etc). The app can also take VAT into account and include in the price lists as well.
+
+    h2 Getting Started
+    p There are several organizational labels available for the different objects in the app (components and products). These should be set up before adding other data. The following steps should be followed to prepare the app for use.
+    ul.list-group
+      li.list-group-item
+        h3 Define Component Types
+        p
+          em Component Types are the only means of organizing different components. Some possible examples might be 'Chains', 'Clasps', or 'Ribbons'.
+        = image_tag('help_ct_1.png')
+        br
+        p Click on the 'Organization' dropdown in the menu above and then click on 'Component Types'. You may want to open this in a separate page so you can refer back to the help.
+        = image_tag('help_ct_2.png')
+        br
+        p This page is where you can create new component types (see the circled form). It also shows you all of the different component types that have been defined and provides you with links to view their components, edit their names, or delete them. Note that deleting a component type will delete all of its components.
+        p
+          b Before you continue, create as many different component types as you can think of (and feel free to delete the example ones).
+      li.list-group-item
+        h3 Define Components
+        p
+          em Components are the building blocks of products. They are defined by a name, a cost, and a component type.
+        = image_tag('help_c_1.png')
+        br
+        p Click on the "Components" link in the menu above. This will take you to the main Components page.
+        = image_tag('help_c_2.png')
+        br
+        p Similar to the Component Types page, there is a form here to create new components. Simply select the component type, enter the name and the cost, and click the button. Below the form you can view all of the currently defined components; you can click on the name of any component type to only view the components of that type. There are also links to edit or delete any specific component.
+        p
+          b Create as many different components as you can think of; we'll use them to define products shortly.
+      li.list-group-item
+        h3 Define Product Lines
+      li.list-group-item
+        h3 Define Product Sets
+      li.list-group-item
+        h3 Define Categories
+      li.list-group-item
+        h3 Define Materials
+      li.list-group-item
+        h3 Define Products
+      li.list-group-item
+        h3 Define Prices
+      li.list-group-item
+        h3 Generate Price Reports
