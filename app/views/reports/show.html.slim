@@ -1,6 +1,7 @@
 - provide(:title, 'Price List')
 
 br
+=> link_to 'Print', '#', onclick: "window.print();return false;", class: 'btn btn-success hidden-print'
 = link_to 'Go Back', :back, class: 'btn btn-danger hidden-print'
 br
 
@@ -10,21 +11,21 @@ br
   .table-responsive.text-center
     table.table.table-striped.table-bordered.table-hover
       thead
-        tr colspan=@colspan
-          th = line.name
         tr
-          th Product Name
-          th Product Set
+          th[colspan=@colspan] = line.name
+        tr
+          th Name
+          th Set
           - @prices.each do |price|
-            th = price.name
+            th = price.name.capitalize
             - if @enable_vat
               th = "#{price.name} With VAT"
       tbody
       - @products.where(product_line_id: line.id).each do |product|
         tr
-          td = product.name
-          td = product.product_set.name
+          td = product.name.capitalize
+          td = product.product_set.name.capitalize
           - @prices.each do |price|
-            td = local_currency(product.cost_price)
+            td = local_currency(price.multiple*product.cost_price)
             - if @enable_vat
               td = local_currency(price.multiple_with_vat*product.cost_price)

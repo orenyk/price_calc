@@ -1,36 +1,47 @@
 = simple_form_for(@report) do |f|
   = f.error_notification
-  br
-  p If you don't check off any boxes it is assumed that you want to include all records, rather than none.
+  p
+    em If you don't check off any boxes it is assumed that you want to include all records, rather than none.
   .form-inputs
     .row
-      .col-xs-3
-        .h4 Product Lines
-        .checkbox
-          = f.input :product_line_ids, as: :check_boxes, collection: ProductLine.all { |pl| [pl.name, pl.id] }, label: false
-      .col-xs-3
-        .h4 Product Sets
-        .checkbox
-          = f.input :product_set_ids, as: :check_boxes, collection: ProductSet.all { |ps| [ps.name, ps.id] }, label: false
-      .col-xs-3
-        .h4 Categories
-        .checkbox
-          = f.input :category_ids, as: :check_boxes, collection: Category.all { |c| [c.name, c.id] }, label: false
-      .col-xs-3
-        .h4 Materials
-        .checkbox
-          = f.input :material_ids, as: :check_boxes, collection: Material.all { |m| [m.name, m.id] }, label: false
-    .row
-      .col-xs-3
-        .h4 Prices
-        .checkbox
-          = f.input :price_ids, as: :check_boxes, collection: Price.all.order(:multiple) { |p| [p.name, p.id] }, label: false
-      .col-xs-3
-        .h4 VAT?
-        .checkbox
-          = f.input :enable_vat, as: :boolean, label: false, inline_label: 'Yes, please!'
+      .col-xs-4
+        h4 Product Lines
+        = f.input :product_line_ids, as: :check_boxes, collection: ProductLine.all { |pl| [pl.name, pl.id] }, label: false
+      .col-xs-4
+        h4 Prices
+        = f.input :price_ids, as: :check_boxes, collection: Price.all.order(:multiple).map { |p| ["#{p.name.capitalize} (#{sprintf('%1.2f', p.multiple)})", p.id] }, label: false, checked: Price.where.not(id: 1).map { |p| p.id }
+      .col-xs-4
+        h4 VAT?
+        = f.input :enable_vat, as: :boolean, label: false, inline_label: 'Yes, please!', input_html: { checked: true }
+        br
+    / .row
+    /   .col-xs-3
+    /     .h4 Product Lines
+    /     .checkbox
+    /       = f.input :product_line_ids, as: :check_boxes, collection: ProductLine.all { |pl| [pl.name, pl.id] }, label: false
+    /   .col-xs-3
+    /     .h4 Product Sets
+    /     .checkbox
+    /       = f.input :product_set_ids, as: :check_boxes, collection: ProductSet.all { |ps| [ps.name, ps.id] }, label: false
+    /   .col-xs-3
+    /     .h4 Categories
+    /     .checkbox
+    /       = f.input :category_ids, as: :check_boxes, collection: Category.all { |c| [c.name, c.id] }, label: false
+    /   .col-xs-3
+    /     .h4 Materials
+    /     .checkbox
+    /       = f.input :material_ids, as: :check_boxes, collection: Material.all { |m| [m.name, m.id] }, label: false
+    / .row
+    /   .col-xs-3
+    /     .h4 Prices
+    /     .checkbox
+    /       = f.input :price_ids, as: :check_boxes, collection: Price.all.order(:multiple) { |p| [p.name, p.id] }, label: false
+    /   .col-xs-3
+    /     .h4 VAT?
+    /     .checkbox
+    /       = f.input :enable_vat, as: :boolean, label: false, inline_label: 'Yes, please!'
 
-      br
+    /   br
 
   .form-actions
     => f.button :submit, class: 'btn btn-primary'

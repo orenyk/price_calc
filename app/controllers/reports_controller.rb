@@ -20,18 +20,18 @@ class ReportsController < ApplicationController
 
     # account for empty string passed for missing checkboxes
     pl = report_params[:product_line_ids].reject!(&:empty?)
-    ps = report_params[:product_set_ids].reject!(&:empty?)
-    c = report_params[:category_ids].reject!(&:empty?)
-    m = report_params[:material_ids].reject!(&:empty?)
+    # ps = report_params[:product_set_ids].reject!(&:empty?)
+    # c = report_params[:category_ids].reject!(&:empty?)
+    # m = report_params[:material_ids].reject!(&:empty?)
 
     # store product lines and filtered products
     @lines = ProductLine.all
     @lines = ProductLine.where(id: pl) unless pl.empty?
-    @products = Product.includes(:product_set).all.order(:product_set_id)
+    @products = Product.includes(:product_set).all.order(:product_set_id, :name)
     @products = @products.where(product_line: pl) unless pl.empty?
-    @products = @products.where(product_set: ps) unless ps.empty?
-    @products = @products.where(category: c) unless c.empty?
-    @products = @products.where(materials: m) unless m.empty?
+    # @products = @products.where(product_set: ps) unless ps.empty?
+    # @products = @products.where(category: c) unless c.empty?
+    # @products = @products.where(materials: m) unless m.empty?
 
     # set up price selection and VAT toggle setting as class variables for the
     # view
