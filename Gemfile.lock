@@ -77,7 +77,6 @@ GEM
     faker (1.4.3)
       i18n (~> 0.5)
     ffi (1.9.6)
-    high_voltage (2.2.1)
     hike (1.2.3)
     i18n (0.6.11)
     interception (0.5)
@@ -236,7 +235,6 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
-  high_voltage
   jbuilder (~> 2.0)
   jquery-rails
   launchy

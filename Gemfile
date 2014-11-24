@@ -12,7 +12,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'bootstrap-sass'
 gem 'devise'
-gem 'high_voltage'
 gem 'pg'
 gem 'simple_form'
 gem 'slim-rails'
