@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   resources :prices, except: :show
 
   # reporting resource
-  resources :reports, except: [:edit, :update]
+  resources :reports, except: [:index, :show, :edit, :update, :destroy]
 
   # Any other routes are handled here (as ActionDispatch prevents
   # RoutingError from hitting ApplicationController::rescue_action).
