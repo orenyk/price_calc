@@ -1,24 +1,35 @@
 - provide(:title, 'Product Sets')
 
-.container
-  .col-sm-8.col-sm-offset-2
-    .page-header
-      h1 All Product Sets
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1 All Product Sets
 
-    .table-responsive.text-center
-      table.table.table-striped.table-bordered.table-hover
-        thead
-          tr
-            th Name
-            th Line
-            th
-            th
-        tbody
-        - @product_sets.each do |product_set|
-          tr
-            td = product_set.name
-            td = link_to("#{product_set.product_line.name}", edit_product_line_path(product_set.product_line))
-            td = link_to 'Edit', edit_product_set_path(product_set), class: 'btn btn-primary'
-            td = link_to 'Destroy', product_set, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-    br
-    = link_to 'New Product Set', new_product_set_path, class: 'btn btn-primary'
+  h3.text-center Create New Product Set
+  br
+  = simple_form_for(@product_set) do |f|
+    = f.error_notification
+    .row
+      .col-sm-4
+        = f.association :product_line, input_html: { class: 'form-control' }, label: false, prompt: 'Select Product Line'
+      .col-sm-5
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-3.text-center
+        = f.button :submit, 'Create', class: 'btn btn-primary'
+  br
+
+  h3.text-center All Product Sets
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th
+          th
+          th
+      tbody
+      - @product_sets.each do |product_set|
+        tr
+          td = product_set.name.capitalize
+          td = link_to 'Show', product_set_path(product_set), class: 'btn btn-default'
+          td = link_to 'Edit', edit_product_set_path(product_set), class: 'btn btn-primary'
+          td = link_to 'Destroy', product_set, data: { :confirm => "Are you sure? This will delete all #{product_set.name.capitalize} products." }, :method => :delete, class: 'btn btn-danger'

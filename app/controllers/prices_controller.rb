@@ -7,6 +7,7 @@ class PricesController < ApplicationController
   # index action
   def index
     @prices = Price.all.order(:multiple)
+    @price = Price.new
   end
 
   # show action
@@ -14,9 +15,9 @@ class PricesController < ApplicationController
   # end
 
   # new action
-  def new
-    @price = Price.new
-  end
+  # def new
+  #   @price = Price.new
+  # end
 
   # create action
   def create

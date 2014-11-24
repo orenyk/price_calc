@@ -6,16 +6,17 @@ class ProductLinesController < ApplicationController
   # index action
   def index
     @product_lines = ProductLine.all.order(:name)
+    @product_line = ProductLine.new
   end
 
   # show action
-  # def show
-  # end
+  def show
+  end
 
   # new action
-  def new
-    @product_line = ProductLine.new
-  end
+  # def new
+  #   @product_line = ProductLine.new
+  # end
 
   # create action
   def create
@@ -53,7 +54,7 @@ private
 
   # find the relevant product line from the params
   def set_product_line
-    @product_line = ProductLine.find(params[:id])
+    @product_line = ProductLine.includes(:products).order('products.product_set_id', 'products.name').find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

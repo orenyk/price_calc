@@ -1,22 +1,33 @@
 - provide(:title, 'Component Types')
 
-.container
-  .col-sm-8.col-sm-offset-2
-    .page-header
-      h1 All Component Types
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1 Component Types
 
-    .table-responsive.text-center
-      table.table.table-striped.table-bordered.table-hover
-        thead
-          tr
-            th Name
-            th
-            th
-        tbody
-        - @component_types.each do |component_type|
-          tr
-            td = component_type.name
-            td = link_to 'Edit', edit_component_type_path(component_type), class: 'btn btn-primary'
-            td = link_to 'Destroy', component_type, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-    br
-    = link_to 'New Component Type', new_component_type_path, class: 'btn btn-primary'
+  h3.text-center Create New Component Type
+  br
+  = simple_form_for(@component_type) do |f|
+    = f.error_notification
+    .row
+      .col-sm-8
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-4.text-center
+        = f.button :submit, class: 'btn btn-primary'
+  br
+
+  h3.text-center All Component Types
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th
+          th
+          th
+      tbody
+      - @component_types.each do |component_type|
+        tr
+          td = component_type.name.capitalize
+          td = link_to 'Show', component_type_path(component_type), class: 'btn btn-default'
+          td = link_to 'Edit', edit_component_type_path(component_type), class: 'btn btn-primary'
+          td = link_to 'Destroy', component_type, data: { :confirm => "Are you sure? This will delete all #{component_type.name.capitalize} components." }, :method => :delete, class: 'btn btn-danger'

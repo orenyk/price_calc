@@ -1,26 +1,49 @@
-- provide(:title, 'All Products')
+- provide(:title, 'Products')
 
-.page-header
-  h1 All Products
+.col-sm-12
+  .page-header
+    h1 Products
 
-.table-responsive.text-center
-  table.table.table-striped.table-bordered.table-hover
-    thead
-      tr
-        th Name
-        th Line
-        th Cost Price
-        th
-        th
-        th
-    tbody
-    - @products.each do |product|
-      tr
-        td = product.name
-        td = link_to("#{product.product_line.name}", edit_product_line_path(product.product_line))
-        td = local_currency(product.cost_price)
-        td = link_to 'Show', product, class: 'btn btn-default'
-        td = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
-        td = link_to 'Destroy', product, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-br
-= link_to 'New Product', new_product_path, class: 'btn btn-primary'
+  h3.text-center Create New Product
+  br
+  = simple_form_for(@product) do |f|
+    = f.error_notification
+    .row
+      .col-sm-4
+        = f.association :product_line, input_html: { class: 'form-control' }, label: false, prompt: 'Select Line'
+      .col-sm-4
+        = f.input :product_set_id, collection: ProductLine.all.order(:name), as: :grouped_select, group_method: "product_sets".to_sym, input_html: { class: 'form-control' }, label_method: :name, value_method: :id, group_label_method: :name, prompt: 'Select Set', required: true, label: false
+      .col-sm-4
+        = f.association :category, input_html: { class: 'form-control' }, label: false, prompt: 'Select Category'
+        br
+    .row
+      .col-sm-4
+        = f.association :material, input_html: { class: 'form-control' }, label: false, prompt: 'Select Material'
+      .col-sm-4
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-4.text-center
+        = f.button :submit, 'Create', class: 'btn btn-primary'
+  br
+
+  h3.text-center All Products
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th Line
+          th Set
+          th Cost Price
+          th
+          th
+          th
+      tbody
+      - @products.each do |product|
+        tr
+          td = product.name.capitalize
+          td = link_to("#{product.product_line.name.capitalize}", product_line_path(product.product_line))
+          td = link_to("#{product.product_set.name.capitalize}", product_set_path(product.product_line))
+          td = local_currency(product.cost_price)
+          td = link_to 'Show', product, class: 'btn btn-default'
+          td = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
+          td = link_to 'Destroy', product, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'

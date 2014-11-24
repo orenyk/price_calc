@@ -7,16 +7,17 @@ class CategoriesController < ApplicationController
   # index action
   def index
     @categories = Category.all.order(:name)
+    @category = Category.new
   end
 
   # show action
-  # def show
-  # end
+  def show
+  end
 
   # new action
-  def new
-    @category = Category.new
-  end
+  # def new
+  #   @category = Category.new
+  # end
 
   # create action
   def create
@@ -54,7 +55,7 @@ private
 
   # find the relevant category from the params
   def set_category
-    @category = Category.find(params[:id])
+    @category = Category.includes(:products).order('products.product_line_id', 'products.name').find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

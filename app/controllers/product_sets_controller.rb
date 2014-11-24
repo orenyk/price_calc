@@ -6,16 +6,17 @@ class ProductSetsController < ApplicationController
   # index action
   def index
     @product_sets = ProductSet.all.order(:name)
+    @product_set = ProductSet.new
   end
 
   # show action
-  # def show
-  # end
+  def show
+  end
 
   # new action
-  def new
-    @product_set = ProductSet.new
-  end
+  # def new
+  #   @product_set = ProductSet.new
+  # end
 
   # create action
   def create
@@ -53,7 +54,7 @@ private
 
   # find the relevant product set from the params
   def set_product_set
-    @product_set = ProductSet.find(params[:id])
+    @product_set = ProductSet.includes(:products).order('products.name').find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

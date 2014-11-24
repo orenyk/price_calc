@@ -7,16 +7,17 @@ class MaterialsController < ApplicationController
   # index action
   def index
     @materials = Material.all.order(:name)
+    @material = Material.new
   end
 
   # show action
-  # def show
-  # end
+  def show
+  end
 
   # new action
-  def new
-    @material = Material.new
-  end
+  # def new
+  #   @material = Material.new
+  # end
 
   # create action
   def create
@@ -54,7 +55,7 @@ private
 
   # find the relevant material from the params
   def set_material
-    @material = Material.find(params[:id])
+    @material = Material.includes(:products).order('products.product_line_id', 'products.name').find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

@@ -7,16 +7,17 @@ class ComponentTypesController < ApplicationController
   # index action
   def index
     @component_types = ComponentType.all.order(:name)
+    @component_type = ComponentType.new
   end
 
   # show action
-  # def show
-  # end
+  def show
+  end
 
   # new action
-  def new
-    @component_type = ComponentType.new
-  end
+  # def new
+  #   @component_type = ComponentType.new
+  # end
 
   # create action
   def create
@@ -54,7 +55,7 @@ private
 
   # find the relevant component type from the params
   def set_component_type
-    @component_type = ComponentType.find(params[:id])
+    @component_type = ComponentType.includes(:components).order('components.name').find(params[:id])
 
   rescue ActiveRecord::RecordNotFound
     flash[:error] = 'That page does not exist.'

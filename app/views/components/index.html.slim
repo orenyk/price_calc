@@ -1,26 +1,39 @@
 - provide(:title, 'Components')
 
-.container
-  .col-sm-8.col-sm-offset-2
-    .page-header
-      h1 All Components
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1 Components
 
-    .table-responsive.text-center
-      table.table.table-striped.table-bordered.table-hover
-        thead
-          tr
-            th Name
-            th Cost
-            th Type
-            th
-            th
-        tbody
-        - @components.each do |component|
-          tr
-            td = component.name
-            td = local_currency(component.cost)
-            td = link_to("#{component.component_type.name}", edit_component_type_path(component.component_type))
-            td = link_to 'Edit', edit_component_path(component), class: 'btn btn-primary'
-            td = link_to 'Destroy', component, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-    br
-    = link_to 'New Component', new_component_path, class: 'btn btn-primary'
+  h3.text-center Create New Component
+  br
+  = simple_form_for(@component) do |f|
+    = f.error_notification
+    .row
+      .col-sm-4
+        = f.association :component_type, input_html: { class: 'form-control' }, label: false, prompt: 'Select Type'
+      .col-sm-4
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-2
+        = f.input :cost, input_html: { class: 'form-control' }, label: false, placeholder: 'Cost'
+      .col-sm-2.text-center
+        = f.button :submit, 'Create', class: 'btn btn-primary'
+  br
+
+  h3.text-center All Components
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th Cost
+          th Type
+          th
+          th
+      tbody
+      - @components.each do |component|
+        tr
+          td = component.name.capitalize
+          td = local_currency(component.cost)
+          td = link_to("#{component.component_type.name}", component_type_path(component.component_type))
+          td = link_to 'Edit', edit_component_path(component), class: 'btn btn-primary'
+          td = link_to 'Destroy', component, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'

@@ -1,10 +1,34 @@
-- provide(:title, @material.name)
+- provide(:title, @material.name.capitalize)
 
-.page-header
-  h1 = @material.name
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1
+      => @material.name.capitalize
+      => link_to 'Edit', edit_material_path(@material), class: 'btn btn-primary'
+      => link_to 'Delete', @material, data: { confirm: "Are you sure? This will delete all #{@material.name.capitalize} products." }, method: :delete, class: 'btn btn-danger'
+      = link_to 'View All Materials', materials_path, class: 'btn btn-default'
 
-.container
-  .form-actions
-    => link_to 'Edit', edit_material_path(@material), class: 'btn btn-primary'
-    => link_to 'Delete', @material, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
-    = link_to 'View All Categories', materials_path, class: 'btn btn-default'
+  h3.text-center = "All #{@material.name.capitalize.pluralize}"
+  - if @material.products.empty?
+    h4.text-center No products yet
+    p.text-center = link_to 'Create Product', new_product_path, class: 'btn btn-primary'
+  - else
+    .table-responsive.text-center
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+            th Name
+            th Line
+            th Cost Price
+            th
+            th
+            th
+        tbody
+        - @material.products.each do |product|
+          tr
+            td = product.name.capitalize
+            td = link_to("#{product.product_line.name.capitalize}", product_line_path(product.product_line))
+            td = local_currency(product.cost_price)
+            td = link_to 'Show', product, class: 'btn btn-default'
+            td = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
+            td = link_to 'Destroy', product, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'

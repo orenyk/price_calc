@@ -10,15 +10,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :products do
-    resources :ingredients
+    resources :ingredients, except: [:new, :show, :edit, :destroy]
   end
-  resources :categories, except: :show
-  resources :product_lines, except: :show
-  resources :product_sets, except: :show
-  resources :materials, except: :show
-  resources :components, except: :show
-  resources :component_types, except: :show
-  resources :prices, except: :show
+  resources :categories, except: :new
+  resources :product_lines, except: :new
+  resources :product_sets, except: :new
+  resources :materials, except: :new
+  resources :components, except: [:new, :show]
+  resources :component_types, except: :new
+  resources :prices, except: [:new, :show]
 
   # reporting resource
   resources :reports, except: [:index, :show, :edit, :update, :destroy]

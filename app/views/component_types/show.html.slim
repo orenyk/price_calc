@@ -1,10 +1,30 @@
-- provide(:title, @component_type.name)
+- provide(:title, @component_type.name.capitalize)
 
-.page-header
-  h1 = @component_type.name
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1
+      => @component_type.name.capitalize
+      => link_to 'Edit', edit_component_type_path(@component_type), class: 'btn btn-primary'
+      => link_to 'Delete', @component_type, data: { confirm: "Are you sure? This will delete all #{@component_type.name.capitalize} components." }, method: :delete, class: 'btn btn-danger'
+      = link_to 'View All Component Types', component_types_path, class: 'btn btn-default'
 
-.container
-  .form-actions
-    => link_to 'Edit', edit_component_type_path(@component_type), class: 'btn btn-primary'
-    => link_to 'Delete', @component_type, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
-    = link_to 'View All Component Types', component_types_path, class: 'btn btn-default'
+  h3.text-center = "All #{@component_type.name.capitalize.pluralize}"
+  - if @component_type.components.empty?
+    h4.text-center No components yet
+    p.text-center = link_to 'Create Component', components_path, class: 'btn btn-primary'
+  - else
+    .table-responsive.text-center
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+            th Name
+            th Cost
+            th
+            th
+        tbody
+        - @component_type.components.each do |component|
+          tr
+            td = component.name.capitalize
+            td = local_currency(component.cost)
+            td = link_to 'Edit', edit_component_path(component), class: 'btn btn-primary'
+            td = link_to 'Destroy', component, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'

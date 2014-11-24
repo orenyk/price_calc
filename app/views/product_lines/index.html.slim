@@ -1,22 +1,33 @@
 - provide(:title, 'Product Lines')
 
-.container
-  .col-sm-8.col-sm-offset-2
-    .page-header
-      h1 All Product Lines
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1 All Product Lines
 
-    .table-responsive.text-center
-      table.table.table-striped.table-bordered.table-hover
-        thead
-          tr
-            th Name
-            th
-            th
-        tbody
-        - @product_lines.each do |product_line|
-          tr
-            td = product_line.name
-            td = link_to 'Edit', edit_product_line_path(product_line), class: 'btn btn-primary'
-            td = link_to 'Destroy', product_line, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-    br
-    = link_to 'New Product Line', new_product_line_path, class: 'btn btn-primary'
+  h3.text-center Create New Product Line
+  br
+  = simple_form_for(@product_line) do |f|
+    = f.error_notification
+    .row
+      .col-sm-8
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-4.text-center
+        = f.button :submit, class: 'btn btn-primary'
+  br
+
+  h3.text-center All Product Lines
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th
+          th
+          th
+      tbody
+      - @product_lines.each do |product_line|
+        tr
+          td = product_line.name.capitalize
+          td = link_to 'Show', product_line_path(product_line), class: 'btn btn-default'
+          td = link_to 'Edit', edit_product_line_path(product_line), class: 'btn btn-primary'
+          td = link_to 'Destroy', product_line, data: { :confirm => "Are you sure? This will delete all #{product_line.name.capitalize} products and sets." }, :method => :delete, class: 'btn btn-danger'

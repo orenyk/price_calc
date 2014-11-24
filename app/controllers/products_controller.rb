@@ -6,7 +6,8 @@ class ProductsController < ApplicationController
 
   # index action
   def index
-    @products = Product.all.includes(:material, :category, :product_set).order(:name)
+    @products = Product.includes(:product_line, :product_set).order('product_lines.name', 'product_sets.name', 'products.name').all
+    @product = Product.new
   end
 
   # show action

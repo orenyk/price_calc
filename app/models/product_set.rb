@@ -1,7 +1,7 @@
 class ProductSet < ActiveRecord::Base
 
   # associations
-  has_many :products
+  has_many :products, dependent: :destroy
   belongs_to :product_line
 
   # validations

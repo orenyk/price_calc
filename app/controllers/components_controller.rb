@@ -6,7 +6,8 @@ class ComponentsController < ApplicationController
 
   # index action
   def index
-    @components = Component.all.order(:name)
+    @components = Component.includes(:component_type).order('component_types.name', 'components.name').all
+    @component = Component.new
   end
 
   # show action
@@ -14,9 +15,9 @@ class ComponentsController < ApplicationController
   # end
 
   # new action
-  def new
-    @component = Component.new
-  end
+  # def new
+  #   @component = Component.new
+  # end
 
   # create action
   def create

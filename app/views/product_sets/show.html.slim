@@ -1,10 +1,33 @@
-- provide(:title, @product_set.name)
+- provide(:title, @product_set.name.capitalize)
 
-.page-header
-  h1 = @product_set.name
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1
+      => @product_set.name.capitalize
+      small => link_to "(#{@product_set.product_line.name.capitalize})", product_line_path(@product_set.product_line)
+      => link_to 'Edit', edit_product_set_path(@product_set), class: 'btn btn-primary'
+      => link_to 'Delete', @product_set, data: { confirm: "Are you sure? This will delete all #{@product_set.name.capitalize} products." }, method: :delete, class: 'btn btn-danger'
+      = link_to 'View All Product Sets', product_sets_path, class: 'btn btn-default'
 
-.container
-  .form-actions
-    => link_to 'Edit', edit_product_set_path(@product_set), class: 'btn btn-primary'
-    => link_to 'Delete', @product_set, data: { confirm: 'Are you sure?' }, method: :delete, class: 'btn btn-danger'
-    = link_to 'View All Product Sets', product_sets_path, class: 'btn btn-default'
+  h3.text-center = "All #{@product_set.name.capitalize.pluralize}"
+  - if @product_set.products.empty?
+    h4.text-center No products yet
+    p.text-center = link_to 'Create Product', new_product_path, class: 'btn btn-primary'
+  - else
+    .table-responsive.text-center
+      table.table.table-striped.table-bordered.table-hover
+        thead
+          tr
+            th Name
+            th Cost Price
+            th
+            th
+            th
+        tbody
+        - @product_set.products.each do |product|
+          tr
+            td = product.name.capitalize
+            td = local_currency(product.cost_price)
+            td = link_to 'Show', product, class: 'btn btn-default'
+            td = link_to 'Edit', edit_product_path(product), class: 'btn btn-primary'
+            td = link_to 'Destroy', product, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'

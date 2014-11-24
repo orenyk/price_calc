@@ -1,24 +1,35 @@
 - provide(:title, 'Prices')
 
-.container
-  .col-sm-8.col-sm-offset-2
-    .page-header
-      h1 All Prices
+.col-sm-8.col-sm-offset-2
+  .page-header
+    h1 Prices
 
-    .table-responsive.text-center
-      table.table.table-striped.table-bordered.table-hover
-        thead
-          tr
-            th Name
-            th Multiple
-            th
-            th
-        tbody
-        - @prices.each do |price|
-          tr
-            td = price.name
-            td = price.multiple
-            td = link_to 'Edit', edit_price_path(price), class: 'btn btn-primary'
-            td = link_to 'Destroy', price, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
-    br
-    = link_to 'New Price', new_price_path, class: 'btn btn-primary'
+  h3.text-center Create New Price
+  br
+  = simple_form_for(@price) do |f|
+    = f.error_notification
+    .row
+      .col-sm-4
+        = f.input :name, input_html: { class: 'form-control' }, label: false, placeholder: 'Name'
+      .col-sm-4
+        = f.input :multiple, input_html: { class: 'form-control' }, placeholder: 'Multiple', label: false
+      .col-sm-4.text-center
+        = f.button :submit, class: 'btn btn-primary'
+  br
+
+  h3.text-center All Prices
+  .table-responsive.text-center
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th Name
+          th Multiple
+          th
+          th
+      tbody
+      - @prices.each do |price|
+        tr
+          td = price.name.capitalize
+          td = price.multiple
+          td = link_to 'Edit', edit_price_path(price), class: 'btn btn-primary'
+          td = link_to 'Destroy', price, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn btn-danger'
