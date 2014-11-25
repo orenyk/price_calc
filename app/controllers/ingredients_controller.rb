@@ -35,7 +35,7 @@ class IngredientsController < ApplicationController
     end
     # now try to save
     if @ingredient.save
-      flash[:notice] = 'Successfully added ingredient!'
+      flash[:notice] = 'Successfully added component!'
     elsif @ingredient.component.nil?
       flash[:error] = 'Please select a valid component.'
     elsif @ingredient.count < 1
@@ -53,17 +53,18 @@ class IngredientsController < ApplicationController
   # update action
   def update
     if @ingredient.update_attributes(ingredient_params)
-      flash[:notice] = 'Successfully updated ingredient!'
+      flash[:notice] = 'Successfully updated component!'
     else
       flash[:error] = 'That didn\'t work, please try again.'
     end
+    binding.pry
     redirect_to product_path(@ingredient.product), status: 303
   end
 
   # destroy acton
   def destroy
     @ingredient.destroy
-    flash[:notice] = 'Successfully removed ingredient.'
+    flash[:notice] = 'Successfully removed component.'
     respond_to do |format|
       format.html { redirect_to product_path(@ingredient.product), status: 303 }
       format.js { render :js => "window.location.href = '#{product_path(@ingredient.product)}'" }
